@@ -1,0 +1,58 @@
+<div [formGroup]="formGroup">
+  <div class="example-container">
+        <mat-form-field class="example-full-width">
+            <input type="text" matInput  placeholder="Filtrar por ISBN, Título ou Autor" formControlName="search">
+        </mat-form-field>
+  </div>
+  <div class="center">
+        <mat-form-field class="example-full-width">
+            <input type="number" matInput  placeholder="Ano" formControlName="datIni">
+        </mat-form-field>
+        Até
+        <mat-form-field class="example-full-width">
+            <input type="number" matInput placeholder="Ano" formControlName="datFim">
+        </mat-form-field>
+      <button mat-button color="primary" (click)="applyFilter()">Buscar</button>
+    </div>
+</div>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="livros">
+      <ng-container matColumnDef="Livro">
+          <th mat-header-cell *matHeaderCellDef> Livro </th>
+          <td mat-cell *matCellDef="let lvr"> {{lvr.livro}}</td>
+      </ng-container>
+      <ng-container matColumnDef="ISBN">
+          <th mat-header-cell *matHeaderCellDef> ISBN </th>
+          <td mat-cell *matCellDef="let lvr"> {{lvr.isbn}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Autor">
+          <th mat-header-cell *matHeaderCellDef> Autor </th>
+          <td mat-cell *matCellDef="let lvr"> {{lvr.autor}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Editora">
+          <th mat-header-cell *matHeaderCellDef> Editora </th>
+          <td mat-cell *matCellDef="let lvr"> {{lvr.editora}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Ano">
+          <th mat-header-cell *matHeaderCellDef> Ano </th>
+          <td mat-cell *matCellDef="let lvr"> {{lvr.ano}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Ações">
+          <th mat-header-cell *matHeaderCellDef> Ações </th>
+          <td mat-cell *matCellDef="let lvr"> 
+              <button mat-button color="primary" (click)="goToDetails(lvr)">Detalhes</button>  
+          </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+<div *ngIf="shouldRun">
+    <mat-sidenav-container>
+        <mat-sidenav>Start</mat-sidenav>
+        <mat-sidenav position="end">End</mat-sidenav>
+        <section>Main</section>
+      </mat-sidenav-container>
+</div>
