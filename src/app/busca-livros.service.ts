@@ -8,7 +8,7 @@ export class BuscaLivrosService {
 
   constructor(private http: HttpClient) { }
 
-  private readonly baseUrl = 'http://localhost:3000/api';
+  private readonly baseUrl = 'https://busca-livros.herokuapp.com/api';
   getAllBooks() {
     return this.http.get(`${this.baseUrl}/livros`);
   }
